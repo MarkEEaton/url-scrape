@@ -34,7 +34,7 @@ ranking = (Counter(urllist).most_common())
 shortranking = [{k: v} for k, v in ranking[:21] if k != ""]
 
 # print the results
-print(str(filesscraped) + " LibGuides scraped:")
+print(str(filesscraped) + " files scraped:")
 print("--------------------------------")
 for item in shortranking:
     for i in item:
