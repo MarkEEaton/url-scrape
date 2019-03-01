@@ -31,7 +31,11 @@ for filename in os.listdir(path):
 
 # rank the most popular hrefs, and pick the top 20
 ranking = (Counter(urllist).most_common())
-shortranking = [{k: v} for k, v in ranking[:21] if k != ""]
+shortranking = []
+for k, v in ranking[:21]:
+    if len(shortranking) <= 20:
+        if k != "":
+            shortranking.append({k: v})
 
 # print the results
 print(str(filesscraped) + " files scraped:")
