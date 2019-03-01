@@ -3,9 +3,6 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from collections import Counter
 
-"""
-written for Python 3.5.1
-"""
 
 # set the path for the html files
 path = "./html/"
@@ -18,7 +15,7 @@ for filename in os.listdir(path):
 
     # read each file
     try:
-        html = open(path + filename, 'r').read()
+        html = open(path + filename, "r").read()
     except UnicodeDecodeError:
         pass
 
@@ -26,11 +23,11 @@ for filename in os.listdir(path):
     soup = BeautifulSoup(html, "lxml")
 
     # pick out the hrefs and add them to a list
-    for a in soup.find_all('a', href=True):
+    for a in soup.find_all("a", href=True):
         urllist.append((urlparse(a["href"]))[1])
 
 # rank the most popular hrefs, and pick the top 20
-ranking = (Counter(urllist).most_common())
+ranking = Counter(urllist).most_common()
 shortranking = []
 for k, v in ranking[:21]:
     if len(shortranking) <= 20:
@@ -42,5 +39,11 @@ print(str(filesscraped) + " files scraped:")
 print("--------------------------------")
 for item in shortranking:
     for i in item:
-        print(str(shortranking.index(item) + 1) + ". " + i + " ("
-              + str(item[i]) + " hits)")
+        print(
+            str(shortranking.index(item) + 1)
+            + ". "
+            + i
+            + " ("
+            + str(item[i])
+            + " hits)"
+        )
